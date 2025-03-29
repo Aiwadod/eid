@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>معايدة العيد</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f7f7f7;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .images {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+    @font-face {
+      font-family: 'Lateef';
+      src: url('LateefFont-Regular.otf');
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 اكتب اسمك واختر صورة للمعايدة 🎉</h2>
+    <input type="text" id="username" placeholder="اكتب اسمك هنا" />
+    <div class="images">
+      <button onclick="generateCard('eid_1.jpg')">🌞 صورة ١</button>
+      <button onclick="generateCard('eid_2.jpg')">🎨 صورة ٢</button>
+      <button onclick="generateCard('eid_3.jpg')">🌙 صورة ٣</button>
+    </div>
+    <canvas id="cardCanvas" width="1086" height="1536"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("cardCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function generateCard(imageName) {
+      const name = document.getElementById("username").value;
+      if (!name) {
+        alert("رجاءً أدخل اسمك أولاً");
+        return;
+      }
+      const img = new Image();
+      img.onload = function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        ctx.font = "16px Lateef";
+        ctx.fillStyle = "#fff";
+        ctx.textAlign = "center";
+        ctx.fillText(name, 304.771, 350.9004);
+      };
+      img.src = imageName;
+    }
+  </script>
+</body>
+</html>
